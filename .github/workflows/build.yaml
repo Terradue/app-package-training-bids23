@@ -1,0 +1,216 @@
+name: build
+on:
+  push:
+    branches:
+    - master
+    - main
+    - bids23
+
+    paths:
+    # Only rebuild website when apps have changed
+    - 'water-bodies/**'
+    - .github/**
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - run: pip install cwltool
+    - run: cwltool --validate cwl-workflow/app-water-bodies-cloud-native.cwl
+    - run: cwltool --validate cwl-workflow/app-water-body-cloud-native.cwl
+    - run: cwltool --validate cwl-workflow/app-water-body.cwl
+
+  version:
+    needs: validate
+
+    runs-on: ubuntu-latest
+
+    outputs:
+
+      app-version: ${{ steps.set-version.outputs.version }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O ./yq
+      env:
+        VERSION: v4.2.0
+        BINARY: yq_linux_amd64
+    - run: chmod +x ./yq
+    - run: echo "APP_VERSION=$( ./yq e '."s:softwareVersion"' cwl-workflow/app-water-body.cwl | tr -d "\n" )" >> $GITHUB_ENV
+    - run: echo app version is $APP_VERSION
+    - id: set-version
+      run: echo "::set-output name=version::$APP_VERSION"
+
+  container-crop:
+
+    needs: version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo version ${{needs.version.outputs.app-version}}
+    - run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: build & push crop image
+      run: |
+        IMAGE_ID=ghcr.io/terradue/app-package-training-bids23/crop
+        docker build water-bodies/command-line-tools/crop --file water-bodies/command-line-tools/crop/Dockerfile --tag crop
+        docker tag crop $IMAGE_ID:${{needs.version.outputs.app-version}}
+        docker push $IMAGE_ID:${{needs.version.outputs.app-version}}
+
+  container-normalized-difference:
+
+    needs: version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo version ${{needs.version.outputs.app-version}}
+    - run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: build & push norm_diff image
+      run: |
+        IMAGE_ID=ghcr.io/terradue/app-package-training-bids23/norm_diff
+        docker build water-bodies/command-line-tools/norm_diff --file water-bodies/command-line-tools/norm_diff/Dockerfile --tag norm_diff
+        docker tag norm_diff $IMAGE_ID:${{needs.version.outputs.app-version}}
+        docker push $IMAGE_ID:${{needs.version.outputs.app-version}}
+
+  container-otsu:
+
+    needs: version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo version ${{needs.version.outputs.app-version}}
+    - run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: build & push otsu image
+      run: |
+        IMAGE_ID=ghcr.io/terradue/app-package-training-bids23/otsu
+        docker build water-bodies/command-line-tools/otsu --file water-bodies/command-line-tools/otsu/Dockerfile --tag otsu
+        docker tag otsu $IMAGE_ID:${{needs.version.outputs.app-version}}
+        docker push $IMAGE_ID:${{needs.version.outputs.app-version}}
+
+  container-stac:
+
+    needs: version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo version ${{needs.version.outputs.app-version}}
+    - run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: build & push stac image
+      run: |
+        IMAGE_ID=ghcr.io/terradue/app-package-training-bids23/stac
+        docker build water-bodies/command-line-tools/stac --file water-bodies/command-line-tools/stac/Dockerfile --tag stac
+        docker tag stac $IMAGE_ID:${{needs.version.outputs.app-version}}
+        docker push $IMAGE_ID:${{needs.version.outputs.app-version}}
+
+  container-stage:
+
+    needs: version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo version ${{needs.version.outputs.app-version}}
+    - run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: build & push stage image
+      run: |
+        IMAGE_ID=ghcr.io/terradue/app-package-training-bids23/stage
+        docker build . --file water-bodies/command-line-tools/stage/Dockerfile --tag stage
+        docker tag stage $IMAGE_ID:${{needs.version.outputs.app-version}}
+        docker push $IMAGE_ID:${{needs.version.outputs.app-version}}
+
+  publish-artifacts:
+
+    needs:
+    - container-crop
+    - container-normalized-difference
+    - container-otsu
+    - container-stac
+    - version
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+      step=crop
+      tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
+    - run: |
+      step=norm_diff
+      tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
+    - run: |
+      step=otsu
+      tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
+    - run: |
+      step=stac
+      tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
+      s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
+    - run: mkdir downloads
+    - run: |
+        cp cwl-workflow/app-water-bodies-cloud-native.cwl downloads/app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
+        cp cwl-workflow/app-water-body-cloud-native.cwl downloads/app-water-body-cloud-native.${{needs.version.outputs.app-version}}.cwl
+        cp cwl-workflow/app-water-body.cwl downloads/app-water-body.${{needs.version.outputs.app-version}}.cwl
+    - uses: actions/upload-artifact@v2
+      with:
+        name: application-package
+        path: downloads
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{needs.version.outputs.app-version}}
+        tag_name: ${{needs.version.outputs.app-version}}
+        #body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: upload linux artifact 1
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: downloads/app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
+        asset_name: app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
+        asset_content_type: text/yaml
+    - name: upload linux artifact 2
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: downloads/app-water-body-cloud-native.${{needs.version.outputs.app-version}}.cwl
+        asset_name: app-water-body-cloud-native.${{needs.version.outputs.app-version}}.cwl
+        asset_content_type: text/yaml
+    - name: upload linux artifact 3
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: downloads/app-water-body.${{needs.version.outputs.app-version}}.cwl
+        asset_name: app-water-body.${{needs.version.outputs.app-version}}.cwl
+        asset_content_type: text/yaml
