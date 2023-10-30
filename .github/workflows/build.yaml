@@ -147,7 +147,7 @@ jobs:
         for step in crop norm_diff otsu stac
         do
           tag="ghcr.io/terradue/app-package-training-bids23/${step}:${{needs.version.outputs.app-version}}"
-          shatag=$( docker inspect ${tag} jq -r '.[0]["RepoDigests"][0]' )
+          shatag=$( docker inspect ${tag} | yq -r '.[0]["RepoDigests"][0]' )
 
           s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-bodies-cloud-native.cwl
           s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body-cloud-native.cwl
