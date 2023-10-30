@@ -18,7 +18,6 @@ theme:
 plugins:
   - search
   - mermaid2
-  - macros
 
 markdown_extensions:
   - pymdownx.details
@@ -32,9 +31,6 @@ markdown_extensions:
       generic: true
   - pymdownx.superfences
   - pymdownx.tabbed
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
