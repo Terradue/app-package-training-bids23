@@ -155,9 +155,9 @@ jobs:
           s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body-cloud-native.cwl
           s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body.cwl
 
-          r="${code_repository} yq -i eval '."s:codeRepository" = {"url" : env(r)}' cwl-workflow/app-water-bodies-cloud-native.cwl
-          r="${code_repository} yq -i eval '."s:codeRepository" = {"url" : env(r)}' cwl-workflow/app-water-body-cloud-native.cwl
-          r="${code_repository} yq -i eval '."s:codeRepository" = {"url" : env(r)}' cwl-workflow/app-water-body.cwl
+          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-bodies-cloud-native.cwl
+          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body-cloud-native.cwl
+          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body.cwl
 
         done
     - run: mkdir downloads
