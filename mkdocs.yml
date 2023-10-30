@@ -1,0 +1,111 @@
+site_name: Mastering Earth Observation Application Packaging with CWL
+
+theme:
+    logo: styles/img/logo.png
+    name: material
+
+    palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+plugins:
+  - search
+  - mermaid2
+  - macros
+
+markdown_extensions:
+  - pymdownx.details
+  - abbr
+  - admonition
+  - footnotes
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - attr_list
+  - pymdownx.snippets:
+      base_path: './'
+  - pymdownx.highlight:
+      line_spans: __span
+extra_css:
+  - styles/css/app.css
+  - https://unpkg.com/mermaid@8.9.1/dist/mermaid.css
+  
+extra_javascript:
+  - javascripts/config.js
+  - https://unpkg.com/mermaid@8.9.1/dist/mermaid.min.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: 'index.md'
+  - Earth Observation Application Package:
+    - OGC Context: app-package/ogc-context.md
+  - Detecting water bodies:
+    - The app: app/app.md
+    - Steps:
+      - Crop: 
+        - Description: app/crop/app.md
+        - Running the step: python-env/crop.md
+      - Normalized Difference:
+        - Description: app/normalized-difference/app.md
+        - Running the step: python-env/norm-diff.md
+      - Otsu threshold:
+        - Description: app/otsu/app.md
+        - Running the step: python-env/otsu.md
+      - STAC Catalog:
+        - Description: app/stac/app.md
+        - Running the step: python-env/stac.md
+  - Package the EO Application:
+    - Creating the containers: 
+      - Build the containers: containers/build.md
+      - Test the containers:
+        - Crop: containers/crop.md
+        - Normalized difference: containers/norm-diff.md
+        - Ostu threshold: containers/otsu.md
+        - STAC Catalog: containers/stac.md
+    - Create CWL CommandLineTool(s):
+      - Crop: cwl-cli/crop.md
+      - Normalized difference: cwl-cli/norm-diff.md
+      - Ostu threshold: cwl-cli/otsu.md
+      - STAC Catalog: cwl-cli/stac.md
+    - Create the CWL Workflow(s):
+      - Cloud native processing with Sentinel-2: cwl-workflow/cloud-native.md
+      - With staged Landsat-9:
+        - Understanding the stage-in/out: cwl-workflow/stage-in-out.md
+        - CWL CommandLineTool for stage-in: cwl-workflow/stage-in.md
+        - Processing a staged Landsat-9 acquisition: cwl-workflow/staged.md
+  - Execution Scenarios:
+    - Running on a local machine:
+      - Sentinel-2: cwl-workflow/exec-cloud-native.md
+      - Landsat-9: cwl-workflow/exec-stage-in.md
+    - Running CWL Workflow on Kubernetes: 
+      - Publish container images: kubernetes/prepare-images.md
+      - Prepare a Scatter Workflow: kubernetes/scatter-cloud-native.md
+      - Release the CWL Workflow: kubernetes/ci.md
+      - Run the CWL Workflow with calrissian: kubernetes/calrissian.md 
+  - Reference:
+    - OGC Application Package Best Practice: reference/ogc-ap-bp.md
+    - CWL CommandLineTool: reference/cwl-commandlinetool.md
+    - CWL Workflow: reference/cwl-workflow.md
+    - Tools: 
+      - cwltool: reference/cwltool.md
+      - calrissian: reference/calrissian.md
