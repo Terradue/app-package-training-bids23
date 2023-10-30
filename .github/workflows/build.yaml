@@ -144,29 +144,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        step=crop
-        tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
-    - run: |
-        step=norm_diff
-        tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
-    - run: |
-        step=otsu
-        tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
-    - run: |
-        step=stac
-        tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-bodies-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body-cloud-native.cwl
-        s="${step}" yq -i eval '(.$graph[] | select (.id == env(step)) ).hints.DockerRequirement.dockerPull = env(tag)' cwl-workflow/app-water-body.cwl
+        for step in crop norm_diff otsu stac
+        do
+          tag="ghcr.io/terradue/ogc-eo-application-package-hands-on/${step}:${{needs.version.outputs.app-version}}"
+          s="${step}" t= "${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-bodies-cloud-native.cwl
+          s="${step}" t= "${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body-cloud-native.cwl
+          s="${step}" t= "${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body.cwl
+        done
     - run: mkdir downloads
     - run: |
         cp cwl-workflow/app-water-bodies-cloud-native.cwl downloads/app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
