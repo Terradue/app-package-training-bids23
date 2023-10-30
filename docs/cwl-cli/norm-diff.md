@@ -1,6 +1,6 @@
 
 
-```yaml linenums="1" hl_lines="9-12 49-53"
+```yaml linenums="1" hl_lines="9-12 49-53" title="cwl-cli/norm-diff.cwl"
 --8<--
 cwl-cli/norm-diff.cwl
 --8<--

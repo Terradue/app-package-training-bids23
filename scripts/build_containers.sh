@@ -1,4 +1,9 @@
-podman build --format docker -t localhost/crop:latest ${WORKSPACE}/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/crop
-podman build --format docker -t localhost/norm-diff:latest ${WORKSPACE}/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/norm_diff
-podman build --format docker -t localhost/otsu:latest ${WORKSPACE}/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/otsu
-podman build --format docker -t localhost/stac:latest ${WORKSPACE}/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/stac
+export WORKSPACE=/workspace/app-package-training-bids23
+export RUNTIME=/workspace/runs
+mkdir -p ${RUNTIME}
+cd ${RUNTIME}
+
+podman build --format docker -t localhost/crop:latest ${WORKSPACE}/water-bodies/command-line-tools/crop
+podman build --format docker -t localhost/norm-diff:latest ${WORKSPACE}/water-bodies/command-line-tools/norm_diff
+podman build --format docker -t localhost/otsu:latest ${WORKSPACE}/water-bodies/command-line-tools/otsu
+podman build --format docker -t localhost/stac:latest ${WORKSPACE}/water-bodies/command-line-tools/stac

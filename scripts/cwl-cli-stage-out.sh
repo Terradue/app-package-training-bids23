@@ -1,6 +1,6 @@
 cwltool \
     --podman \
-    stage-out.cwl \
+    ${WORKSPACE}/cwl-cli/stage-out.cwl \
     --aws_access_key_id $( cat ~/.aws/credentials | grep aws_access_key_id | cut -d "=" -f 2 ) \
     --aws_secret_access_key $( cat ~/.aws/credentials | grep aws_secret_access_key | cut -d "=" -f 2 ) \
     --endpoint_url $( cat ~/.aws/config | grep endpoint_url | head -n 1 | cut -d "=" -f 2 ) \

@@ -1,7 +1,9 @@
+export WORKSPACE=/workspace/app-package-training-bids23
+
 cwltool \
     --podman \
     --outdir /workspace/runs \
-    norm_diff.cwl \
+    ${WORKSPACE}/cwl-cli/norm_diff.cwl \
     --rasters \
     /workspace/runs/crop_green.tif \
     --rasters \

@@ -1,3 +1,8 @@
+export WORKSPACE=/workspace/app-package-training-bids23
+export RUNTIME=/workspace/runs
+mkdir -p ${RUNTIME}
+cd ${RUNTIME}
+
 python \
-    ${WORKSPACE}/ogc-eo-application-package-hands-on/water-bodies/command-line-tools/otsu/app.py \
+    ${WORKSPACE}/water-bodies/command-line-tools/otsu/app.py \
     norm_diff.tif

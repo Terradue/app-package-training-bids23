@@ -1,6 +1,6 @@
 
 
-```yaml linenums="1" hl_lines="9-12 49-53" title="file: crop.cwl"
+```yaml linenums="1" hl_lines="9-12 49-53" title="cwl-cli/crop.cwl"
 --8<--
 cwl-cli/crop.cwl
 --8<--
@@ -16,7 +16,7 @@ Or
 
 ```yaml title="crop-params.yaml"
 --8<--
-docs/cwl-cli/crop-params.yaml
+cwl-cli/crop-params.yaml
 --8<--
 ```
 
