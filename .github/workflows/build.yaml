@@ -144,7 +144,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        code_repository=$( cat codemeta.json | jq -r ".codeRepository )
+        code_repository=$( cat codemeta.json | jq -r ".codeRepository" )
         for step in crop norm_diff otsu stac
         do
           tag="ghcr.io/terradue/app-package-training-bids23/${step}:${{needs.version.outputs.app-version}}"
