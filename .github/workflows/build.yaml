@@ -147,9 +147,9 @@ jobs:
         for step in crop norm_diff otsu stac
         do
           tag="ghcr.io/terradue/app-package-training-bids23/${step}:${{needs.version.outputs.app-version}}"
-          s="${step}" t= "${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-bodies-cloud-native.cwl
-          s="${step}" t= "${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body-cloud-native.cwl
-          s="${step}" t= "${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body.cwl
+          s="${step}" t="${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-bodies-cloud-native.cwl
+          s="${step}" t="${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body-cloud-native.cwl
+          s="${step}" t="${tag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body.cwl
         done
     - run: mkdir downloads
     - run: |
