@@ -27,7 +27,7 @@ scripts/ostu_env.sh
 ```
 
 ```
-source ${WORKSPACE}/scripts/norm_diff_env.sh
+source ${WORKSPACE}/scripts/otsu_env.sh
 ```
 
 ### Step 3 - Calculate the ostu threshold

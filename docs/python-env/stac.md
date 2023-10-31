@@ -1,6 +1,6 @@
 ### Goal
 
-Run the `normalized-difference` step in a Python virtual environment.
+Run the `stac` step in a Python virtual environment.
 
 ### Step 1 - Configure the workspace
 
