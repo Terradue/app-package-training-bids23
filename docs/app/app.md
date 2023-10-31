@@ -34,7 +34,7 @@ graph TB
   A[STAC Items] --> B
   A[STAC Items] --> C
 subgraph Process STAC item
-  B["crop(green)"] --> D[Normalized difference];
+  B((("crop(green)"))) --> D[Normalized difference];
   C["crop(nir)"] --> D[Normalized difference];
   D --> E[Otsu threshold]
 end
