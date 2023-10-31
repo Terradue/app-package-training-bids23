@@ -10,6 +10,7 @@ on:
     # Only rebuild website when apps have changed
     - 'water-bodies/**'
     - .github/**
+    - docs/**
 
 jobs:
   validate:
