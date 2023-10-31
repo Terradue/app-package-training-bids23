@@ -6,7 +6,7 @@ This step is highlighted below:
 
 ``` mermaid
 graph TB
-style D stroke:#f66,stroke-width:2px
+style D stroke:#f66,stroke-width:3px
 subgraph Process STAC item
   A[STAC Item] -.-> B
   A[STAC Item] -.-> C

@@ -6,22 +6,22 @@ This step is highlighted below:
 
 ``` mermaid
 graph TB
-style B stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
-style C stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+style B stroke:#f66,stroke-width:3px
+style C stroke:#f66,stroke-width:3px
 subgraph Process STAC item
-  A[STAC Item] -- STAC Item URL --> B
-  A[STAC Item] -- STAC Item URL --> C
-  A[STAC Item] -- STAC Item URL --> F
+  A[STAC Item] == STAC Item URL ==> B
+  A[STAC Item] == STAC Item URL ==> C
+  A[STAC Item] -.-> F
 subgraph scatter on bands
   B["crop(green)"];
   C["crop(nir)"];
 end
-  B["crop(green)"] -- crop_green.tif --> D[Normalized difference];
-  C["crop(nir)"] -- crop_green.tif --> D[Normalized difference];
-  D -- norm_diff.tif --> E[Otsu threshold]
+  B["crop(green)"] == crop_green.tif ==> D[Normalized difference];
+  C["crop(nir)"] == crop_green.tif ==> D[Normalized difference];
+  D -.-> E[Otsu threshold]
 end
-  E -- otsu.tif --> F[Create STAC Catalog]
-  F -- "catalog.json/item.json/asset otsu.tif" --> G[(storage)]
+  E -.-> F[Create STAC Catalog]
+  F -.-> G[(storage)]
 ```
 
 ### Code
