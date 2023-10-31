@@ -1,4 +1,4 @@
-## Goal
+### Goal
 
 Run the `crop` step in a Python virtual environment.
 
