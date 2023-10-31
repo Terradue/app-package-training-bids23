@@ -11,7 +11,7 @@ podman \
     --rm \
     --env=HOME=/runs \
     --env=PYTHONPATH=/app \
-    localhost/norm_diff:latest \
+    localhost/norm-diff:latest \
     python \
     -m \
     app \
