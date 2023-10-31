@@ -33,7 +33,7 @@ E --> F(("`Create
 STAC Catalog`"))
 ```
 
-The CWL Workflow is:
+The CWL Workflow is shown below and the lines highlighted chain the steps:
 
 ```yaml linenums="1" hl_lines="8-71" title="app-water-body-cloud-native.cwl"
 --8<--
