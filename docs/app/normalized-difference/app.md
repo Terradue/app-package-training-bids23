@@ -1,3 +1,9 @@
+### Step purpose 
+
+Purpose: to calculate the normalized difference of the "green" or "nir" bands.
+
+### Code
+
 The `norm_diff` script is a command-line tool for performing a normalized difference between two raster images. 
 
 It uses the `click`, `rasterio`, and `numpy` libraries to perform the calculation and save the result as a GeoTIFF file. 
@@ -28,6 +34,8 @@ Usage: app.py [OPTIONS] RASTERS...
 Options:
   --help  Show this message and exit.
 ```
+
+The Python code is provided here:
 
 ```python linenums="1" title="water-bodies/command-line-tools/norm_diff/app.py"
 --8<--
