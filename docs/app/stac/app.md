@@ -2,8 +2,28 @@
 
 Purpose: produce a STAC Catalog with a STAC Item describing the detected water body result. 
 
-### Code
+This step is highlighted below:
 
+``` mermaid
+graph TB
+style F stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+subgraph Process STAC item
+  A[STAC Item] -- STAC Item URL --> B
+  A[STAC Item] -- STAC Item URL --> C
+  A[STAC Item] -- STAC Item URL --> F
+subgraph scatter on bands
+  B["crop(green)"];
+  C["crop(nir)"];
+end
+  B["crop(green)"] -- crop_green.tif --> D[Normalized difference];
+  C["crop(nir)"] -- crop_green.tif --> D[Normalized difference];
+  D -- norm_diff.tif --> E[Otsu threshold]
+end
+  E -- otsu.tif --> F[Create STAC Catalog]
+  F -- "catalog.json/item.json/asset otsu.tif" --> G[(storage)]
+```
+
+### Code
 
 The `stac` script is a command-line tool for creating a SpatioTemporal Asset Catalog (STAC) catalog containing detected water bodies.
 

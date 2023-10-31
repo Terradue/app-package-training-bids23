@@ -2,6 +2,28 @@
 
 Purpose: to crop a particular band defined as a common band name (such as the "green" or "nir" band) from a satellite image acquired by either Sentinel-2 or Landsat-9. 
 
+This step is highlighted below:
+
+``` mermaid
+graph TB
+style B stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+style C stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5
+subgraph Process STAC item
+  A[STAC Item] -- STAC Item URL --> B
+  A[STAC Item] -- STAC Item URL --> C
+  A[STAC Item] -- STAC Item URL --> F
+subgraph scatter on bands
+  B["crop(green)"];
+  C["crop(nir)"];
+end
+  B["crop(green)"] -- crop_green.tif --> D[Normalized difference];
+  C["crop(nir)"] -- crop_green.tif --> D[Normalized difference];
+  D -- norm_diff.tif --> E[Otsu threshold]
+end
+  E -- otsu.tif --> F[Create STAC Catalog]
+  F -- "catalog.json/item.json/asset otsu.tif" --> G[(storage)]
+```
+
 ### Code
 
 The `crop.py` script is a command-line tool that takes as input
