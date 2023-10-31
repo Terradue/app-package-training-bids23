@@ -72,13 +72,14 @@ nav:
         - Running the step: python-env/stac.md
   - Package the EO Application:
     - Creating the containers: 
-      - Build the containers: containers/build.md
+      - Scope: containers/scope.md
       - Test the containers:
         - Crop: containers/crop.md
         - Normalized difference: containers/norm-diff.md
         - Ostu threshold: containers/otsu.md
         - STAC Catalog: containers/stac.md
     - Create CWL CommandLineTool(s):
+      - Scope: cwl-cli/scope.md
       - Crop: cwl-cli/crop.md
       - Normalized difference: cwl-cli/norm-diff.md
       - Ostu threshold: cwl-cli/otsu.md
