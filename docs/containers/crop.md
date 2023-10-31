@@ -44,13 +44,13 @@ rm -fr /workspace/runs/*
 Run the command to run the `crop` step with the `green` band in the container with:
 
 ```
-sh ${WORKSPACE}/podman-crop-green.sh
+sh ${WORKSPACE}/scripts/podman-crop-green.sh
 ```
 
 Run the command to run the `crop` step with the `nir` band in the container with:
 
 ```
-sh ${WORKSPACE}/podman-crop-nir.sh
+sh ${WORKSPACE}/scripts/podman-crop-nir.sh
 ```
 
 ### Expected outcome

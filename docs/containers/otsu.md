@@ -17,7 +17,7 @@ scripts/podman-otsu.sh
 Run the command to run the `otsu` step with:
 
 ```
-sh ${WORKSPACE}/podman-otsu.sh
+sh ${WORKSPACE}/scripts/podman-otsu.sh
 ```
 
 ### Expected outcome
