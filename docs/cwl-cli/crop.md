@@ -1,7 +1,7 @@
 
 ### Goal 
 
-Wrap the `crop` step as a Common Workflow Language CommandLineTool and exectute it with a CWL runner.
+Wrap the `crop` step as a Common Workflow Language CommandLineTool and execute it with a CWL runner.
 
 ### How to wrap a step as a CWL CommandLineTool 
 

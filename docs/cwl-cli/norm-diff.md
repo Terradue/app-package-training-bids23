@@ -1,4 +1,10 @@
+### Goal 
 
+Wrap the `norm_diff` step as a Common Workflow Language CommandLineTool and execute it with a CWL runner.
+
+### CWL CommandLineTool wrapping the step
+
+The CWL document below shows the `norm_diff` step wrapped as a CWL CommandLineTool:
 
 ```yaml linenums="1" hl_lines="9-12 49-53" title="cwl-cli/norm-diff.cwl"
 --8<--
@@ -12,20 +18,20 @@ scripts/cwl-cli-norm-diff.sh
 --8<--
 ```
 
-Or
-
-```yaml
-item: "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A"
-aoi: "-121.399,39.834,-120.74,40.472"
-epsg: "EPSG:4326"
-band: "green" 
+```
+sh -x ${WORKSPACE}/scripts/cwl-cli-norm-diff.sh
 ```
 
+### Expected outcome
 
-```bash
-cwltool \
-    --podman \
-    --outdir /workspace/runs \
-    crop.cwl \
-    params.yaml 
+The folder `/workspace/runs` contains: 
+
+```
+(base) jovyan@coder-mrossi:~/runs$ tree .
+.
+├── crop_green.tif
+├── crop_nir.tif
+└── norm_diff.tif
+
+0 directories, 3 files
 ```
