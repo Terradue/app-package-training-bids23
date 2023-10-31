@@ -24,6 +24,8 @@ scripts/crop_env.sh
 
 ### Step 3 - Crop the green band
 
+The command line tool is invoked to crop the green band:
+
 ```bash linenums="1" hl_lines="8-11" title="terminal"
 --8<--
 scripts/crop_green.sh
@@ -32,6 +34,8 @@ scripts/crop_green.sh
 
 ### Step 4 - Crop the NIR band
 
+The command line tool is invoked to crop the NIR band:
+
 ```bash linenums="1" hl_lines="8-11" title="terminal"
 --8<--
 scripts/crop_nir.sh
@@ -39,6 +43,8 @@ scripts/crop_nir.sh
 ```
 
 ### Step 5 - Clean-up
+
+The Python virtual environment is no longer needed.
 
 ```bash linenums="1" title="terminal"
 --8<--
