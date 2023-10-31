@@ -30,27 +30,31 @@ The concepts above mapped to the Water Body Detection application are depicted b
 
 ``` mermaid
 graph TB
+style AA stroke:#f66,stroke-width:3px
+style BB stroke:#f66,stroke-width:3px
 subgraph stage-in
-A[STAC Item] -- STAC Item URL --> AA[Stage-in]
-AA[Stage-in] -- catalog.json/item.json/assets blue, red,  nir ... --> AB[(local storage)]
+  A[STAC Item] -- STAC Item URL --> AA[Stage-in]
+  AA[Stage-in] -- catalog.json/item.json/assets blue, red,  nir ... --> AB[(local storage)]
 end
 subgraph Process STAC item
-AB[(storage)] -- Staged STAC Catalog --> B
-AB[(storage)] -- Staged STAC Catalog --> C
-AB[(storage)] -- Staged STAC Catalog --> F
+  AB[(storage)] -- Staged STAC Catalog --> B
+  AB[(storage)] -- Staged STAC Catalog --> C
+  AB[(storage)] -- Staged STAC Catalog --> F
 subgraph scatter on bands
-B["crop(green)"];
-C["crop(nir)"];
+  B["crop(green)"];
+  C["crop(nir)"];
 end
-B["crop(green)"] -- crop_green.tif --> D[Normalized difference];
-C["crop(nir)"] -- crop_green.tif --> D[Normalized difference];
-D -- norm_diff.tif --> E[Otsu threshold]
+  B["crop(green)"] -.-> D[Normalized difference];
+  C["crop(nir)"] -.-> D[Normalized difference];
+  D -.-> E[Otsu threshold]
 end
-E -- otsu.tif --> F[Create STAC Catalog]
-F -- "catalog.json/item.json/asset otsu.tif" --> G[(storage)]
+  E -.-> F[Create STAC Catalog]
+  F -.-> G[(storage)]
+
 subgraph stage-out
-G -- "catalog.json/item.json/asset otsu.tif" --> BB[Stage-out] 
-BB --> H[("Remote 
-storage")]
+
+  G -- "catalog.json/item.json/asset otsu.tif" --> BB[Stage-out] 
+  BB --> H[(Remote 
+  storage)]
 end
 ```
