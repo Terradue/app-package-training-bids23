@@ -74,3 +74,13 @@ source ${WORKSPACE}/scripts/crop_deactivate.sh
 
 ### Expected outcome
 
+The folder `/workspace/runs` contains: 
+
+```
+(base) jovyan@coder-mrossi:~/runs$ tree .
+.
+├── crop_green.tif
+└── crop_nir.tif
+
+0 directories, 2 files
+```
