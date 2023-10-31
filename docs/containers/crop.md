@@ -1,4 +1,4 @@
-## Goal 
+### Goal 
 
 Run the `crop` step in the container image tagged and built in the previous step.
 
