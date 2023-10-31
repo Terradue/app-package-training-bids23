@@ -14,7 +14,7 @@ scripts/setup.sh
 
 ### Step 2 - Create the Python virtual environment
 
-The required Python modules are installed using pip:
+The required Python modules are installed using `pip`:
 
 ```bash linenums="1" hl_lines="3" title="terminal"
 --8<--
@@ -26,7 +26,7 @@ scripts/crop_env.sh
 
 The command line tool is invoked to crop the green band:
 
-```bash linenums="1" hl_lines="8-11" title="terminal"
+```bash linenums="1" hl_lines="7-11" title="terminal"
 --8<--
 scripts/crop_green.sh
 --8<--
@@ -36,7 +36,7 @@ scripts/crop_green.sh
 
 The command line tool is invoked to crop the NIR band:
 
-```bash linenums="1" hl_lines="8-11" title="terminal"
+```bash linenums="1" hl_lines="7-11" title="terminal"
 --8<--
 scripts/crop_nir.sh
 --8<--
