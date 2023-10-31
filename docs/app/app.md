@@ -60,7 +60,7 @@ The development and test dataset is made of two Sentinel-2 acquisitions:
 
 | Acquisitions 	|                                             	|           |
 |--------------	|----------------------------------------------	|----------------------------------------------------------------------------------------------------------------------	| 
-| Mission      	|                              Sentinel-2           Sentinel-2 | Landsat-9 |                                   
+| Mission      	|                              Sentinel-2           Sentinel-2 |                                   
 | Date         	|            2022-05-24                         |                                2021-07-13                                                              	|         2023-10-15 |                                                      
 | URL          	| [S2B_10TFK_20210713_0_L2A](https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A) 	| [S2A_10TFK_20220524_0_L2A](https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2A_10TFK_20220524_0_L2A) 	| |
 | Quicklook    	| ![image](https://roda.sentinel-hub.com/sentinel-s2-l1c/tiles/10/T/FK/2021/7/13/0/preview.jpg)          	| ![image](https://roda.sentinel-hub.com/sentinel-s2-l1c/tiles/10/T/FK/2021/7/13/0/preview.jpg)                                         	| ![image](https://planetarycomputer.microsoft.com/api/data/v1/item/preview.png?collection=landsat-c2-l2&item=LC09_L2SP_042033_20231015_02_T1&assets=red&assets=green&assets=blue&color_formula=gamma+RGB+2.7%2C+saturation+1.5%2C+sigmoidal+RGB+15+0.55&format=png) |
