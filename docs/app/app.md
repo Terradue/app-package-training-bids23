@@ -27,41 +27,55 @@ In the simplest form, the Otsu algorithm returns a single intensity threshold th
 
 ![image](https://upload.wikimedia.org/wikipedia/commons/3/34/Otsu%27s_Method_Visualization.gif)
 
-The Water Bodies detection steps are depicted below:
-
-``` mermaid
-graph TB
-  A[STAC Items] --> B
-  A[STAC Items] --> C
-subgraph Process STAC item
-  B["crop(green)"] --> D[Normalized difference];
-  C["crop(nir)"] --> D[Normalized difference];
-  D --> E[Otsu threshold]
-end
-  E --> F[Create STAC]
-```
-
-
-``` mermaid
-graph TB
-  A[STAC Item] --> B
-  A[STAC Item] --> C
-subgraph Process STAC item
-subgraph scatter on band
-  B["crop(green)"] --> D[Normalized difference];
-  C["crop(nir)"] --> D[Normalized difference];
-end
-  D --> E[Otsu threshold]
-end
-  E --> F[Create STAC Catalog]
-```
-
-
 The application can be used in two modes:
 
 - take a list of Sentinel-2 STAC items references, applies the crop over the area of interest for the radiometric bands green and NIR, the normalized difference, the Ostu threshold and finaly creates a STAC catalog and items for the generated results.
 
+  This scenario is depicted below:
+
+``` mermaid
+graph TB
+subgraph Process STAC item
+  A[STAC Item] -- STAC Item URL --> B
+  A[STAC Item] -- STAC Item URL --> C
+  A[STAC Item] -- STAC Item URL --> F
+subgraph scatter on bands
+  B["crop(green)"];
+  C["crop(nir)"];
+end
+  B["crop(green)"] -- crop_green.tif --> D[Normalized difference];
+  C["crop(nir)"] -- crop_green.tif --> D[Normalized difference];
+  D -- norm_diff.tif --> E[Otsu threshold]
+end
+  E -- otsu.tif --> F[Create STAC Catalog]
+  F -- "catalog.json/item.json/asset otsu.tif" --> G[(storage)]
+```
+
 - read staged Landsat-9 data as a STAC Catalog and a STAC item, applies the crop over the area of interest for the radiometric bands green and NIR, the normalized difference, the Ostu threshold and finaly creates a STAC catalog and items for the generated results.
+
+  This scenario is depicted below:
+  
+``` mermaid
+graph TB
+subgraph stage-in
+  A[STAC Item] -- STAC Item URL --> AA[Stage-in]
+  AA[Stage-in] -- catalog.json/item.json/assets blue, red,  nir ... --> AB[(storage)]
+end
+subgraph Process STAC item
+  AB[(storage)] -- Staged STAC Catalog --> B
+  AB[(storage)] -- Staged STAC Catalog --> C
+  AB[(storage)] -- Staged STAC Catalog --> F
+subgraph scatter on bands
+  B["crop(green)"];
+  C["crop(nir)"];
+end
+  B["crop(green)"] -- crop_green.tif --> D[Normalized difference];
+  C["crop(nir)"] -- crop_green.tif --> D[Normalized difference];
+  D -- norm_diff.tif --> E[Otsu threshold]
+end
+  E -- otsu.tif --> F[Create STAC Catalog]
+  F -- "catalog.json/item.json/asset otsu.tif" --> G[(storage)]
+```
 
 Alice packages the application as an Application Package to include a macro workflow that reads the list of Sentinel-2 STAC items references or Landsat-9 staged data, launches a sub-workflow to detect the water bodies and creates the STAC catalog:
 
