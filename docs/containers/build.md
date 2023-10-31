@@ -64,7 +64,7 @@ sh ${WORKSPACE}/scripts/build_containers.sh
 
 ### Expected outcome
 
-The local container image cache lists the built images:
+The local container registry lists the built images:
 
 ```
 (base) jovyan@coder-mrossi:~/runs$ podman images | grep localhost
