@@ -1,7 +1,4 @@
 export WORKSPACE=/workspace/app-package-training-bids23
-export RUNTIME=/workspace/runs
-mkdir -p ${RUNTIME}
-cd ${RUNTIME}
 
 podman build --format docker -t localhost/crop:latest ${WORKSPACE}/water-bodies/command-line-tools/crop
 podman build --format docker -t localhost/norm-diff:latest ${WORKSPACE}/water-bodies/command-line-tools/norm_diff
