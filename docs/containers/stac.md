@@ -17,7 +17,7 @@ scripts/podman-stac.sh
 Run the command to run the `stac` step with:
 
 ```
-sh ${WORKSPACE}/scripts/podman-stac.sh
+sh -x ${WORKSPACE}/scripts/podman-stac.sh
 ```
 
 ### Expected outcome

@@ -17,7 +17,7 @@ scripts/podman-norm-diff.sh
 Run the command to run the `norm_diff` step with:
 
 ```
-sh ${WORKSPACE}/scripts/podman-norm-diff.sh
+sh -x ${WORKSPACE}/scripts/podman-norm-diff.sh
 ```
 
 ### Expected outcome

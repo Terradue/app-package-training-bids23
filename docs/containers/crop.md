@@ -50,7 +50,7 @@ sh ${WORKSPACE}/scripts/podman-crop-green.sh
 Run the command to run the `crop` step with the `nir` band in the container with:
 
 ```
-sh ${WORKSPACE}/scripts/podman-crop-nir.sh
+sh -x ${WORKSPACE}/scripts/podman-crop-nir.sh
 ```
 
 ### Expected outcome
