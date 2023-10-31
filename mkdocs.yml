@@ -85,6 +85,7 @@ nav:
       - Ostu threshold: cwl-cli/otsu.md
       - STAC Catalog: cwl-cli/stac.md
     - Create the CWL Workflow(s):
+      - Scope: cwl-workflow/scope.md
       - Cloud native processing with Sentinel-2: cwl-workflow/cloud-native.md
       - With staged Landsat-9:
         - Understanding the stage-in/out: cwl-workflow/stage-in-out.md

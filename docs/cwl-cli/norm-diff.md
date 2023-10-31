@@ -12,6 +12,10 @@ cwl-cli/norm-diff.cwl
 --8<--
 ```
 
+### Steps
+
+Run the CWL document using the `cwltool` CWL runner to execute the `norm_diff` step with:
+
 ```bash linenums="1" hl_lines="9-12 49-53"
 --8<--
 scripts/cwl-cli-norm-diff.sh
