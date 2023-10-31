@@ -15,7 +15,7 @@
         "name": "Terradue"
     },
     "keywords": [
-        "NDWI"
+        "NDWI", "Landsat-9", "Sentinel-2", "Water Bodies"
     ],
     "programmingLanguage": [
         "Python", "CWL"

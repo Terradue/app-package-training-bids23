@@ -98,6 +98,7 @@ nav:
       - Prepare a Scatter Workflow: kubernetes/scatter-cloud-native.md
       - Release the CWL Workflow: kubernetes/ci.md
       - Run the CWL Workflow with calrissian: kubernetes/calrissian.md 
+  - FAIR Application Packages: fair/best-practice.md
   - Reference:
     - OGC Application Package Best Practice: reference/ogc-ap-bp.md
     - CWL CommandLineTool: reference/cwl-commandlinetool.md
