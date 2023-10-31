@@ -12,6 +12,10 @@ scripts/setup.sh
 --8<--
 ```
 
+```
+sh ${WORKSPACE}/scripts/setup.sh
+```
+
 ### Step 2 - Create the Python virtual environment
 
 The required Python modules are installed using `pip`:
@@ -20,6 +24,10 @@ The required Python modules are installed using `pip`:
 --8<--
 scripts/crop_env.sh
 --8<--
+```
+
+```
+sh ${WORKSPACE}/scripts/crop_env.sh
 ```
 
 ### Step 3 - Crop the green band
@@ -32,6 +40,10 @@ scripts/crop_green.sh
 --8<--
 ```
 
+```
+sh ${WORKSPACE}/scripts/crop_green.sh
+```
+
 ### Step 4 - Crop the NIR band
 
 The command line tool is invoked to crop the NIR band:
@@ -42,6 +54,10 @@ scripts/crop_nir.sh
 --8<--
 ```
 
+```
+sh ${WORKSPACE}/scripts/crop_nir.sh
+```
+
 ### Step 5 - Clean-up
 
 The Python virtual environment is no longer needed.
@@ -50,6 +66,10 @@ The Python virtual environment is no longer needed.
 --8<--
 scripts/crop_deactivate.sh
 --8<--
+```
+
+```
+sh ${WORKSPACE}/scripts/crop_deactivate.sh
 ```
 
 ### Expected outcome
