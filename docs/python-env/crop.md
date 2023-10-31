@@ -13,7 +13,7 @@ scripts/setup.sh
 ```
 
 ```
-sh ${WORKSPACE}/scripts/setup.sh
+source /workspace/app-package-training-bids23/scripts/setup.sh
 ```
 
 ### Step 2 - Create the Python virtual environment
@@ -27,7 +27,7 @@ scripts/crop_env.sh
 ```
 
 ```
-sh ${WORKSPACE}/scripts/crop_env.sh
+source ${WORKSPACE}/scripts/crop_env.sh
 ```
 
 ### Step 3 - Crop the green band
@@ -41,7 +41,7 @@ scripts/crop_green.sh
 ```
 
 ```
-sh ${WORKSPACE}/scripts/crop_green.sh
+source ${WORKSPACE}/scripts/crop_green.sh
 ```
 
 ### Step 4 - Crop the NIR band
@@ -55,7 +55,7 @@ scripts/crop_nir.sh
 ```
 
 ```
-sh ${WORKSPACE}/scripts/crop_nir.sh
+source ${WORKSPACE}/scripts/crop_nir.sh
 ```
 
 ### Step 5 - Clean-up
@@ -69,7 +69,7 @@ scripts/crop_deactivate.sh
 ```
 
 ```
-sh ${WORKSPACE}/scripts/crop_deactivate.sh
+source ${WORKSPACE}/scripts/crop_deactivate.sh
 ```
 
 ### Expected outcome
