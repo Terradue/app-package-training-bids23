@@ -57,7 +57,7 @@ nav:
     - OGC Context: app-package/ogc-context.md
   - Introducing the application:
     - Water bodies detection: app/app.md
-    - Steps:
+    - Application Steps:
       - Crop: 
         - Description: app/crop/app.md
         - Running the step: python-env/crop.md
