@@ -34,12 +34,28 @@ graph TB
   A[STAC Items] --> B
   A[STAC Items] --> C
 subgraph Process STAC item
-  B[["crop(green)"]] --> D[Normalized difference];
+  B["crop(green)"] --> D[Normalized difference];
   C["crop(nir)"] --> D[Normalized difference];
   D --> E[Otsu threshold]
 end
   E --> F[Create STAC]
 ```
+
+
+``` mermaid
+graph TB
+  A[STAC Item] --> B
+  A[STAC Item] --> C
+subgraph Process STAC item
+subgraph scatter on band
+  B["crop(green)"] --> D[Normalized difference];
+  C["crop(nir)"] --> D[Normalized difference];
+end
+  D --> E[Otsu threshold]
+end
+  E --> F[Create STAC Catalog]
+```
+
 
 The application can be used in two modes:
 
