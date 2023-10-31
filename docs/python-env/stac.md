@@ -65,9 +65,14 @@ The folder `/workspace/runs` contains:
 ```
 (base) jovyan@coder-mrossi:~/runs$ tree .
 .
+├── S2B_10TFK_20210713_0_L2A
+│   ├── S2B_10TFK_20210713_0_L2A.json
+│   └── otsu.tif
+├── catalog.json
 ├── crop_green.tif
 ├── crop_nir.tif
-└── norm_diff.tif
+├── norm_diff.tif
+└── otsu.tif
 
-0 directories, 3 files
+1 directory, 7 files
 ```

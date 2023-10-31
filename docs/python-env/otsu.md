@@ -22,7 +22,7 @@ The required Python modules are installed using `pip`:
 
 ```bash linenums="1" hl_lines="3" title="terminal"
 --8<--
-scripts/ostu_env.sh
+scripts/otsu_env.sh
 --8<--
 ```
 
@@ -67,7 +67,8 @@ The folder `/workspace/runs` contains:
 .
 ├── crop_green.tif
 ├── crop_nir.tif
-└── norm_diff.tif
+├── norm_diff.tif
+└── otsu.tif
 
-0 directories, 3 files
+0 directories, 4 files
 ```
