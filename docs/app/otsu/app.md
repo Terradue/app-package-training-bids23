@@ -1,3 +1,9 @@
+### Step purpose 
+
+Purpose: to apply the Otsu threshold to the normalized difference. 
+
+### Code
+
 The `otsu` Python script is a command-line tool for applying the Otsu threshold to a single input raster image. 
 
 It uses the `click`, `rasterio`, `numpy`, `skimage.filters`, and `loguru` libraries.
@@ -30,6 +36,7 @@ Options:
   --help  Show this message and exit.
 ```
 
+The Python code is provided here:
 
 ```python linenums="1" title="water-bodies/command-line-tools/otsu/app.py"
 --8<--

@@ -1,3 +1,10 @@
+### Step purpose 
+
+Purpose: produce a STAC Catalog with a STAC Item describing the detected water body result. 
+
+### Code
+
+
 The `stac` script is a command-line tool for creating a SpatioTemporal Asset Catalog (STAC) catalog containing detected water bodies.
 
 It takes the STAC Item URLs and corresponding water body GeoTIFFs as input, creates STAC Items for each water body, and organizes them into a STAC Catalog. 
@@ -33,7 +40,7 @@ Options:
   --help             Show this message and exit.
 ```
 
-
+The Python code is provided here:
 
 ```python linenums="1" title="water-bodies/command-line-tools/stac/app.py"
 --8<--
