@@ -88,6 +88,39 @@ s:contributor:
   s:affiliation: Planet Earth
   s:email: jane.doe@somedomain.org
   s:name: Doe, Jane
+s:softwareVersion: 1.1.6
+schemas:
+- http://schema.org/version/9.0/schemaorg-current-http.rdf
+```
+
+## Application Package identification and traceability
+
+In a Reproducible FAIR Workflow scenario, it is necessary to ensure that the Application Package is uniquely identified and traceable. 
+
+The assignment of a DOI to the application package extends the metadata section of the Application Package CWL with:
+
+```
+sameAs: URL of a reference Web page that unambiguously indicates the item’s identity. https://schema.org/sameAs.
+```
+
+Example
+
+```yaml hl_lines="16"
+cwlVersion: v1.0
+$graph:
+...
+$namespaces:
+  s: https://schema.org/
+s:author:
+- class: s:Person
+  s:affiliation: Planet Earth
+  s:email: john.doe@somedomain.org
+  s:name: Doe, John
+s:contributor:
+- class: s:Person
+  s:affiliation: Planet Earth
+  s:email: jane.doe@somedomain.org
+  s:name: Doe, Jane
 s:sameas: https://doi.org/10.5072/zenodo.1107209
 s:softwareVersion: 1.1.6
 schemas:
