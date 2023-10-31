@@ -55,8 +55,8 @@ nav:
   - Home: 'index.md'
   - Earth Observation Application Package:
     - OGC Context: app-package/ogc-context.md
-  - Detecting water bodies:
-    - The app: app/app.md
+  - Introducing the application:
+    - Water bodies detection: app/app.md
     - Steps:
       - Crop: 
         - Description: app/crop/app.md
