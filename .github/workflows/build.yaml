@@ -86,6 +86,7 @@ jobs:
     - run: |
         code_repository=$( cat codemeta.json | jq -r ".codeRepository" )
         for cwl in $(ls cwl-workflow/*.cwl)
+        do
           r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' $cwl
         done
     - run: |
