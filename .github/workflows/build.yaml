@@ -62,7 +62,7 @@ jobs:
         docker tag ${{ matrix.step }} $IMAGE_ID:${{needs.version.outputs.app-version}}
         docker push $IMAGE_ID:${{needs.version.outputs.app-version}}
 
-  publish-artifacts:
+  prepare-artifacts:
 
     needs:
     - container-build
@@ -81,12 +81,13 @@ jobs:
           for cwl in $(ls cwl-workflow/*.cwl)
           do
             s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' $cwl
+          done
         done
     - run: |
         code_repository=$( cat codemeta.json | jq -r ".codeRepository" )
-        r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-bodies-cloud-native.cwl
-        r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body-cloud-native.cwl
-        r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body.cwl
+        for cwl in $(ls cwl-workflow/*.cwl)
+          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' $cwl
+        done
     - run: |
         software_version=${{needs.version.outputs.app-version}}
         for cwl in $(ls cwl-workflow/*.cwl)
@@ -103,9 +104,24 @@ jobs:
         done
     - run: mkdir downloads
     - run: |
-        cp cwl-workflow/app-water-bodies-cloud-native.cwl downloads/app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
-        cp cwl-workflow/app-water-body-cloud-native.cwl downloads/app-water-body-cloud-native.${{needs.version.outputs.app-version}}.cwl
-        cp cwl-workflow/app-water-body.cwl downloads/app-water-body.${{needs.version.outputs.app-version}}.cwl
+        for cwl in "app-water-bodies-cloud-native" "app-water-body-cloud-native" "app-water-body"
+        do
+          cp cwl-workflow/${cwl}.cwl downloads/${cwl}.${{needs.version.outputs.app-version}}.cwl
+        done
+  publish-artifacts:
+
+    needs:
+    - prepare-artifacts
+    - version
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix: 
+        step: ["app-water-bodies-cloud-native", "app-water-body-cloud-native", "app-water-body"]
+
+    steps:    
+    
     - uses: actions/upload-artifact@v2
       with:
         name: application-package
@@ -118,7 +134,6 @@ jobs:
         prerelease: false
         release_name: ${{needs.version.outputs.app-version}}
         tag_name: ${{needs.version.outputs.app-version}}
-        #body_path: CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: upload linux artifact 1
@@ -127,24 +142,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: downloads/app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
-        asset_name: app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
-        asset_content_type: text/yaml
-    - name: upload linux artifact 2
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: downloads/app-water-body-cloud-native.${{needs.version.outputs.app-version}}.cwl
-        asset_name: app-water-body-cloud-native.${{needs.version.outputs.app-version}}.cwl
-        asset_content_type: text/yaml
-    - name: upload linux artifact 3
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: downloads/app-water-body.${{needs.version.outputs.app-version}}.cwl
-        asset_name: app-water-body.${{needs.version.outputs.app-version}}.cwl
+        asset_path: downloads/${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
+        asset_name: ${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
         asset_content_type: text/yaml
