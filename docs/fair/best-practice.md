@@ -4,7 +4,6 @@ The SCM has the task of tracking and controlling changes in the software as a pa
 
 SCM practices include revision control and the establishment of baselines.
 
-
 The Application Package code is hosted on a repository publicly accessible (Github, Bitbucket, a GitLab instance, an institutional software forge, etc.) using one of the version control systems supported by (Subversion, Mercurial and Git)
 
 The Application Package code include, at the top level of the source code tree, the following files:

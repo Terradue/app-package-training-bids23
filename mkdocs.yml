@@ -78,13 +78,13 @@ nav:
         - Normalized difference: containers/norm-diff.md
         - Ostu threshold: containers/otsu.md
         - STAC Catalog: containers/stac.md
-    - Create CWL CommandLineTool(s):
+    - Create CWL CommandLineTools:
       - Scope: cwl-cli/scope.md
       - Crop: cwl-cli/crop.md
       - Normalized difference: cwl-cli/norm-diff.md
       - Ostu threshold: cwl-cli/otsu.md
       - STAC Catalog: cwl-cli/stac.md
-    - Create the CWL Workflow(s):
+    - Create the CWL Workflows:
       - Scope: cwl-workflow/scope.md
       - Sentinel-2 Cloud native Workflow: cwl-workflow/cloud-native.md
       - Staged Landsat-9 Workflow:
@@ -92,6 +92,9 @@ nav:
         - CWL CommandLineTool for stage-in: cwl-workflow/stage-in.md
         - Processing a staged Landsat-9 acquisition: cwl-workflow/staged.md
       - Sentinel-2 Workflow of Workflow: cwl-workflow/scatter-cloud-native.md
+    - Release the EO Application:
+      - Scope: release/scope.md
+      - Continuous Integration: release/ci.md
   - Execution Scenarios:
     - Running on a local machine:
       - Sentinel-2: cwl-workflow/exec-cloud-native.md

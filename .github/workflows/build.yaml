@@ -36,12 +36,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - #run: wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O ./yq
-      #env:
-      #  VERSION: v4.2.0
-      #  BINARY: yq_linux_amd64
-    #- run: chmod +x ./yq
-    # - run: echo "APP_VERSION=$( ./yq e '."s:softwareVersion"' cwl-workflow/app-water-body.cwl | tr -d "\n" )" >> $GITHUB_ENV
     - run: echo "APP_VERSION=$(cat codemeta.json | jy -r .version )" >> $GITHUB_ENV
     - run: echo app version is $APP_VERSION
     - id: set-version
