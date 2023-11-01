@@ -158,8 +158,8 @@ jobs:
     - run: |
         software_version=${{needs.version.outputs.app-version}}
         v="${software_version}" yq -i eval '."s:softwareVersion" = env(v)' cwl-workflow/app-water-bodies-cloud-native.cwl
-        v="${software_version}" yq -i eval '."s:softwareVersion" = env(r)' cwl-workflow/app-water-body-cloud-native.cwl
-        v="${software_version}" yq -i eval '."s:softwareVersion" = env(r)' cwl-workflow/app-water-body.cwl
+        v="${software_version}" yq -i eval '."s:softwareVersion" = env(v)' cwl-workflow/app-water-body-cloud-native.cwl
+        v="${software_version}" yq -i eval '."s:softwareVersion" = env(v)' cwl-workflow/app-water-body.cwl
     - run: |
         for cwl in $(ls cwl-workflow/*.cwl)
         do
