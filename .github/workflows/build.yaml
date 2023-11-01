@@ -99,10 +99,33 @@ jobs:
         do
           cp cwl-workflow/${cwl}.cwl downloads/${cwl}.${{needs.version.outputs.app-version}}.cwl
         done
-  publish-artifacts:
+  
+  create-release:
 
     needs:
     - prepare-artifacts
+    - version
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{needs.version.outputs.app-version}}
+          tag_name: ${{needs.version.outputs.app-version}}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - id: set-upload-url
+        run: echo "::set-output name=upload_url::${{ steps.create_release.outputs.upload_url }}"
+
+  publish-artifacts:
+
+    needs:
+    - create-release
     - version
 
     runs-on: ubuntu-latest
@@ -112,27 +135,16 @@ jobs:
         step: ["app-water-bodies-cloud-native", "app-water-body-cloud-native", "app-water-body"]
 
     steps:    
-    
     - uses: actions/upload-artifact@v2
       with:
         name: application-package
         path: downloads
-    - name: release
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: false
-        release_name: ${{needs.version.outputs.app-version}}
-        tag_name: ${{needs.version.outputs.app-version}}
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
     - name: upload linux artifact 1
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{needs.create-release.outputs.upload_url}}
         asset_path: downloads/${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
         asset_name: ${{matrix.step}}.${{needs.version.outputs.app-version}}.cwl
         asset_content_type: text/yaml
