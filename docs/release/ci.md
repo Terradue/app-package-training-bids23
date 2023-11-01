@@ -40,7 +40,9 @@ SCM -- Dockerfile(s) --> C
 C(build container) --> D(push container) 
 end
 D -- push --> CR[(Container Registry)] 
-D -- container sha256 --> F("update Dockerpull in CWL Workflows") -- push --> AR[(Artifact Registry)]
+D -- container sha256 --> F("update Dockerpull/metadata in CWL Workflows") 
+F -- push --> AR[(Artifact Registry)]
+SCM -- codemeta.json --> F
 ```
 
 Below an example of a GitHub CI configuration implementing the scenario:

@@ -108,6 +108,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    outputs:
+
+      upload_url: ${{ steps.set-upload-url.outputs.upload_url }}
+
     steps:
       - name: release
         uses: actions/create-release@v1
