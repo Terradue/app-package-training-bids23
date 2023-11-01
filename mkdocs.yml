@@ -92,9 +92,9 @@ nav:
         - CWL CommandLineTool for stage-in: cwl-workflow/stage-in.md
         - Processing a staged Landsat-9 acquisition: cwl-workflow/staged.md
       - Sentinel-2 Workflow of Workflow: cwl-workflow/scatter-cloud-native.md
-    - Release the EO Application:
-      - Scope: release/scope.md
-      - Continuous Integration: release/ci.md
+  - Release the EO Application:
+    - Scope: release/scope.md
+    - Continuous Integration: release/ci.md
   - Execution Scenarios:
     - Running on a local machine:
       - Sentinel-2: cwl-workflow/exec-cloud-native.md
