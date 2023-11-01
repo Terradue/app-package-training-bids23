@@ -36,7 +36,7 @@ SCM -- codemeta.json --> B
 A(validate CWL Workflow) --> B(extract version)
 B --> C
 subgraph Build containers
-SCM -- Dockerfile(s) --> C
+SCM -- Dockerfiles --> C
 C(build container) --> D(push container) 
 end
 D -- push --> CR[(Container Registry)] 

@@ -101,8 +101,6 @@ nav:
       - Sentinel-2: cwl-workflow/exec-cloud-native.md
       - Landsat-9: cwl-workflow/exec-stage-in.md
     - Running CWL Workflow on Kubernetes: 
-      - Publish container images: kubernetes/prepare-images.md
-      - Release the CWL Workflow: kubernetes/ci.md
       - Run the CWL Workflow with calrissian: kubernetes/calrissian.md 
   - FAIR Application Packages: fair/best-practice.md
   - Reference:
