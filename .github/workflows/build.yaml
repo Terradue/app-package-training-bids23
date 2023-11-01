@@ -84,20 +84,10 @@ jobs:
           done
         done
     - run: |
-        code_repository=$( cat codemeta.json | jq -r ".codeRepository" )
         for cwl in $(ls cwl-workflow/*.cwl)
         do
-          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' $cwl
-        done
-    - run: |
-        software_version=${{needs.version.outputs.app-version}}
-        for cwl in $(ls cwl-workflow/*.cwl)
-        do
-          v="${software_version}" yq -i eval '."s:softwareVersion" = env(v)' $cwl
-        done
-    - run: |
-        for cwl in $(ls cwl-workflow/*.cwl)
-        do
+          r=$( cat codemeta.json | jq -r ".codeRepository" ) yq -i eval '."s:codeRepository" = {"URL" : env(r)}' $cwl
+          v="${{needs.version.outputs.app-version}}" yq -i eval '."s:softwareVersion" = env(v)' $cwl
           n=$(cat codemeta.json | jq -r '(.author[0].givenName + " " + .author[0].familyName)') \
           e=$(cat codemeta.json | jq -r '.author[0].email') \
           a=$(cat codemeta.json | jq -r '.author[0].affiliation["name"]') \
