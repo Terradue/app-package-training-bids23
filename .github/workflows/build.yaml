@@ -93,12 +93,7 @@ jobs:
           a=$(cat codemeta.json | jq -r '.author[0].affiliation["name"]') \
           yq eval -i  '."s:author" += [{"class": "s:Person", "s.name": env(n), "s.email": env(e), "s.affiliation": env(a)}]' $cwl
         done
-    - run: mkdir downloads
-    - run: |
-        for cwl in "app-water-bodies-cloud-native" "app-water-body-cloud-native" "app-water-body"
-        do
-          cp cwl-workflow/${cwl}.cwl downloads/${cwl}.${{needs.version.outputs.app-version}}.cwl
-        done
+    
   
   create-release:
 
@@ -138,7 +133,14 @@ jobs:
       matrix: 
         step: ["app-water-bodies-cloud-native", "app-water-body-cloud-native", "app-water-body"]
 
-    steps:    
+    steps:   
+    - uses: actions/checkout@v2 
+    - run: |
+        mkdir downloads
+        for cwl in "app-water-bodies-cloud-native" "app-water-body-cloud-native" "app-water-body"
+        do
+          cp cwl-workflow/${cwl}.cwl downloads/${cwl}.${{needs.version.outputs.app-version}}.cwl
+        done
     - uses: actions/upload-artifact@v2
       with:
         name: application-package
