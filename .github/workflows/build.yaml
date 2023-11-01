@@ -160,6 +160,14 @@ jobs:
         v="${software_version}" yq -i eval '."s:softwareVersion" = env(v)' cwl-workflow/app-water-bodies-cloud-native.cwl
         v="${software_version}" yq -i eval '."s:softwareVersion" = env(r)' cwl-workflow/app-water-body-cloud-native.cwl
         v="${software_version}" yq -i eval '."s:softwareVersion" = env(r)' cwl-workflow/app-water-body.cwl
+    - run: |
+        for cwl in $(ls cwl-workflow/*.cwl)
+        do
+          n=$(cat codemeta.json | jq -r '(.author[0].givenName + " " + .author[0].familyName)') \
+          e=$(cat codemeta.json | jq -r '.author[0].email') \
+          a=$(cat codemeta.json | jq -r '.author[0].affiliation["name"]') \
+          yq eval -i  '."s:author" += [{"class": "s:Person", "s.name": env(n), "s.email": env(e), "s.affiliation": env(a)}]' $cwl
+        done
     - run: mkdir downloads
     - run: |
         cp cwl-workflow/app-water-bodies-cloud-native.cwl downloads/app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
