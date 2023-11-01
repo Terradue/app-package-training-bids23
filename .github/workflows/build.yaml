@@ -62,43 +62,10 @@ jobs:
         docker tag ${{ matrix.step }} $IMAGE_ID:${{needs.version.outputs.app-version}}
         docker push $IMAGE_ID:${{needs.version.outputs.app-version}}
 
-  prepare-artifacts:
-
-    needs:
-    - container-build
-    - version
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - run: |
-        for step in crop norm_diff otsu stac
-        do
-          tag="ghcr.io/terradue/app-package-training-bids23/${step}:${{needs.version.outputs.app-version}}"
-          docker pull ${tag}
-          shatag=$( docker inspect ${tag} | yq -r '.[0]["RepoDigests"][0]' )
-          for cwl in $(ls cwl-workflow/*.cwl)
-          do
-            s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' $cwl
-          done
-        done
-    - run: |
-        for cwl in $(ls cwl-workflow/*.cwl)
-        do
-          r=$( cat codemeta.json | jq -r ".codeRepository" ) yq -i eval '."s:codeRepository" = {"URL" : env(r)}' $cwl
-          v="${{needs.version.outputs.app-version}}" yq -i eval '."s:softwareVersion" = env(v)' $cwl
-          n=$(cat codemeta.json | jq -r '(.author[0].givenName + " " + .author[0].familyName)') \
-          e=$(cat codemeta.json | jq -r '.author[0].email') \
-          a=$(cat codemeta.json | jq -r '.author[0].affiliation["name"]') \
-          yq eval -i  '."s:author" += [{"class": "s:Person", "s.name": env(n), "s.email": env(e), "s.affiliation": env(a)}]' $cwl
-        done
-    
-  
   create-release:
 
     needs:
-    - prepare-artifacts
+    - container-build
     - version
 
     runs-on: ubuntu-latest
@@ -135,6 +102,27 @@ jobs:
 
     steps:   
     - uses: actions/checkout@v2 
+    - run: |
+        for step in crop norm_diff otsu stac
+        do
+          tag="ghcr.io/terradue/app-package-training-bids23/${step}:${{needs.version.outputs.app-version}}"
+          docker pull ${tag}
+          shatag=$( docker inspect ${tag} | yq -r '.[0]["RepoDigests"][0]' )
+          for cwl in $(ls cwl-workflow/*.cwl)
+          do
+            s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' $cwl
+          done
+        done
+    - run: |
+        for cwl in $(ls cwl-workflow/*.cwl)
+        do
+          r=$( cat codemeta.json | jq -r ".codeRepository" ) yq -i eval '."s:codeRepository" = {"URL" : env(r)}' $cwl
+          v="${{needs.version.outputs.app-version}}" yq -i eval '."s:softwareVersion" = env(v)' $cwl
+          n=$(cat codemeta.json | jq -r '(.author[0].givenName + " " + .author[0].familyName)') \
+          e=$(cat codemeta.json | jq -r '.author[0].email') \
+          a=$(cat codemeta.json | jq -r '.author[0].affiliation["name"]') \
+          yq eval -i  '."s:author" += [{"class": "s:Person", "s.name": env(n), "s.email": env(e), "s.affiliation": env(a)}]' $cwl
+        done
     - run: |
         mkdir downloads
         for cwl in "app-water-bodies-cloud-native" "app-water-body-cloud-native" "app-water-body"
