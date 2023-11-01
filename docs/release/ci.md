@@ -30,7 +30,7 @@ This is depicted below:
 
 ``` mermaid
 graph TB
-SCM[(software registry)]
+SCM[(software repository)]
 SCM -- CWL Workflow --> A
 SCM -- codemeta.json --> B
 A(validate CWL Workflow) --> B(extract version)

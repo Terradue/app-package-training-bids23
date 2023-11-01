@@ -18,7 +18,7 @@ theme:
 plugins:
   - search
   - mermaid2:
-      version: 10.0.2
+      version: 10.6.0
 
 markdown_extensions:
   - pymdownx.details
@@ -44,16 +44,16 @@ markdown_extensions:
       line_spans: __span
 extra_css:
   - styles/css/app.css
-  - https://unpkg.com/mermaid@8.9.1/dist/mermaid.css
+#  - https://unpkg.com/mermaid@8.9.1/dist/mermaid.css
   
 extra_javascript:
   - javascripts/config.js
-  - https://unpkg.com/mermaid@8.9.1/dist/mermaid.min.js
+#  - https://unpkg.com/mermaid@8.9.1/dist/mermaid.min.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
-  # - Home: 'index.md'
+  - Home: 'index.md'
   - Earth Observation Application Package:
     - OGC Context: app-package/ogc-context.md
   - Introducing the application:
@@ -91,17 +91,18 @@ nav:
       - Staged Landsat-9 Workflow:
         - Understanding stage-in/out: cwl-workflow/stage-in-out.md
         - CWL CommandLineTool for stage-in: cwl-workflow/stage-in.md
-        - Processing a staged Landsat-9 acquisition: cwl-workflow/staged.md
-      - Sentinel-2 Workflow of Workflow: cwl-workflow/scatter-cloud-native.md
+        - TODO CWL CommandLineTool for stage-out: cwl-workflow/stage-out.md
+        - TODO Processing a staged Landsat-9 acquisition: cwl-workflow/staged.md
+      - TODO Sentinel-2 Workflow of Workflow: cwl-workflow/scatter-cloud-native.md
   - Release the EO Application:
-    - Scope: release/scope.md
+    - TODO Scope: release/scope.md
     - Continuous Integration: release/ci.md
   - Execution Scenarios:
     - Running on a local machine:
-      - Sentinel-2: cwl-workflow/exec-cloud-native.md
-      - Landsat-9: cwl-workflow/exec-stage-in.md
+      - TODO Sentinel-2: cwl-workflow/exec-cloud-native.md
+      - TODO Landsat-9: cwl-workflow/exec-stage-in.md
     - Running CWL Workflow on Kubernetes: 
-      - Run the CWL Workflow with calrissian: kubernetes/calrissian.md 
+      - TODO Run the CWL Workflow with calrissian: kubernetes/calrissian.md 
   - FAIR Application Packages: fair/best-practice.md
   - Reference:
     - OGC Application Package Best Practice: reference/ogc-ap-bp.md
@@ -110,3 +111,5 @@ nav:
     - Tools: 
       - cwltool: reference/cwltool.md
       - calrissian: reference/calrissian.md
+  - New to YAML: new-to/yaml.md
+  - New to CWL: new-to/cwl.md
