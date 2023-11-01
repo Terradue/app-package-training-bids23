@@ -9,7 +9,11 @@
     "name": "Water Bodies Detection",
     "version": "1.0.0",
     "description": "The Water Bodies Detection is an Application that uses the NDWI index and the Otsu threshold to detect water bodies using Sentinel-2 or Landsat-9 data",
-    "developmentStatus": "concept",
+    "developmentStatus": "active",
+    "downloadUrl": "https://github.com/Terradue/app-package-training-bids23/releases/tag/1.0.0",
+    "relatedLink": [
+        "https://terradue.github.io/app-package-training-bids23"
+    ],
     "funder": {
         "@type": "Organization",
         "name": "Terradue"
