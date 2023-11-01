@@ -65,10 +65,7 @@ jobs:
   publish-artifacts:
 
     needs:
-    - container-crop
-    - container-normalized-difference
-    - container-otsu
-    - container-stac
+    - container-build
     - version
 
     runs-on: ubuntu-latest
