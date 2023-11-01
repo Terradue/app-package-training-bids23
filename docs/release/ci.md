@@ -28,4 +28,30 @@ codemeta.json
 
 ## Application Package Continuous Integration
 
-A typical Continuous Integration scenario for an Application Package includes the release of the CWL document(s) and publishing the container images to a container registry 
+A typical Continuous Integration scenario for an Application Package includes the release of the CWL document(s) and publishing the container images to a container registry.
+
+This is depicted below: 
+
+``` mermaid
+graph TB
+SCM[(software registry)]
+SCM -- CWL Workflow --> A
+SCM -- codemeta.json --> B
+A(validate CWL Workflow) --> B(extract version)
+B --> C
+subgraph Build containers
+SCM -- Dockerfile(s) --> C
+C(build container) --> D(push container) 
+end
+D -- push --> CR[(Container Registry)] 
+D -- container sha256 --> F("update Dockerpull
+in CWL Workflows") -- push --> AR[(Artifact Registry)]
+```
+
+Below an example of a GitHub CI configuration implementing the scenario:
+
+```yaml linenums="1" title=".github/workflows/build.yaml"
+--8<--
+.github/workflows/build.yaml
+--8<--
+```

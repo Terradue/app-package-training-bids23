@@ -140,7 +140,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        code_repository=$( cat codemeta.json | jq -r ".codeRepository" )
         for step in crop norm_diff otsu stac
         do
           tag="ghcr.io/terradue/app-package-training-bids23/${step}:${{needs.version.outputs.app-version}}"
@@ -150,12 +149,17 @@ jobs:
           s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-bodies-cloud-native.cwl
           s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body-cloud-native.cwl
           s="${step}" t="${shatag}" yq -i eval '(.$graph[] | select (.id == env(s)) ).hints.DockerRequirement.dockerPull = env(t)' cwl-workflow/app-water-body.cwl
-
-          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-bodies-cloud-native.cwl
-          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body-cloud-native.cwl
-          r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body.cwl
-
         done
+    - run: |
+        code_repository=$( cat codemeta.json | jq -r ".codeRepository" )
+        r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-bodies-cloud-native.cwl
+        r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body-cloud-native.cwl
+        r="${code_repository}" yq -i eval '."s:codeRepository" = {"URL" : env(r)}' cwl-workflow/app-water-body.cwl
+    - run: |
+        software_version=${{needs.version.outputs.app-version}}
+        v="${software_version}" yq -i eval '."s:softwareVersion" = env(v)' cwl-workflow/app-water-bodies-cloud-native.cwl
+        v="${software_version}" yq -i eval '."s:softwareVersion" = env(r)' cwl-workflow/app-water-body-cloud-native.cwl
+        v="${software_version}" yq -i eval '."s:softwareVersion" = env(r)' cwl-workflow/app-water-body.cwl
     - run: mkdir downloads
     - run: |
         cp cwl-workflow/app-water-bodies-cloud-native.cwl downloads/app-water-bodies-cloud-native.${{needs.version.outputs.app-version}}.cwl
