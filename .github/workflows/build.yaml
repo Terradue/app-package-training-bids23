@@ -36,7 +36,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: echo "APP_VERSION=$(cat codemeta.json | jy -r .version )" >> $GITHUB_ENV
+    - run: echo "APP_VERSION=$(cat codemeta.json | jq -r .version )" >> $GITHUB_ENV
     - run: echo app version is $APP_VERSION
     - id: set-version
       run: echo "::set-output name=version::$APP_VERSION"
