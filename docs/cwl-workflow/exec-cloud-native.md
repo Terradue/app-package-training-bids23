@@ -12,9 +12,13 @@ scripts/setup.sh
 --8<--
 ```
 
+```
+source /workspace/app-package-training-bids23/scripts/setup.sh
+```
+
 ### Step 2 - Download the released Application package
 
-```bash linenums="1" hl_lines="8-71" title="scripts/download-app-water-body-cloud-native.sh"
+```bash linenums="1" hl_lines="5" title="scripts/download-app-water-body-cloud-native.sh"
 --8<--
 scripts/download-app-water-body-cloud-native.sh
 --8<--
@@ -42,14 +46,13 @@ The folder `/workspace/runs` contains:
 
 ``` hl_lines="3"
 (base) jovyan@coder-fbrito:~/runs$ tree .
-.
-└── p371fwrs
+/workspace/runs/
+├── app-water-body-cloud-native.1.0.0.cwl
+└── cmtriamc
     ├── S2B_10TFK_20210713_0_L2A
     │   ├── S2B_10TFK_20210713_0_L2A.json
     │   └── otsu.tif
     └── catalog.json
 
-2 directories, 7 files
+2 directories, 4 files
 ```
-
-Line #6 shows the folder created by the execution.
