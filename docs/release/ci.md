@@ -14,7 +14,7 @@ The Application Package code include, at the top level of the source code tree, 
 * LICENSE, the project license terms. For Open Source Licenses, the standard SPDX license names are used. For large software projects and developers, the REUSE (https://reuse.software/) process and tools can be an option to look at.
 * codemeta.json, a linked data metadata file that helps index the source code in the Software Heritage archive and provides an easy way to link to other related research outputs.
 
-The codemeta.json includes metadata information to support the Continous Integration phase and it is shown below:
+The codemeta.json includes metadata information to support the Continuous Integration phase and it is shown below:
 
 ```json linenums="1" title="codemeta.json"
 --8<--

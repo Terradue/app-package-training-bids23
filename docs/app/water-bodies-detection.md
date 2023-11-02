@@ -29,7 +29,7 @@ In the simplest form, the Otsu algorithm returns a single intensity threshold th
 
 The application can be used in two modes:
 
-- take a list of Sentinel-2 STAC items references, applies the crop over the area of interest for the radiometric bands green and NIR, the normalized difference, the Ostu threshold and finaly creates a STAC catalog and items for the generated results.
+- take a list of Sentinel-2 STAC items references, applies the crop over the area of interest for the radiometric bands green and NIR, the normalized difference, the Ostu threshold and finally creates a STAC catalog and items for the generated results.
 
   This scenario is depicted below:
 

@@ -55,7 +55,7 @@ Being CWL a set of standards, the workflows are executed using a CWL _runner_ an
 
 This guide uses the CWL runner [cwltool](https://pypi.org/project/cwltool).
 
-### Recomendations
+### Recommendations
 
 - Include documentation and labels for all components to enable the automatic generation of helpful visual depictions for any given CWL description
 

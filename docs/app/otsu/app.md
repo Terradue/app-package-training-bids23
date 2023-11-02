@@ -41,7 +41,7 @@ Here's an overview of what the script does:
 
 * It creates an output raster named "otsu.tif" using `rasterio`. This output raster will have the same metadata as the input raster.
 
-* It writes the thresholded binary image to the output raster using dst_dataset.write().
+* It writes the binary image to the output raster using `dst_dataset.write()`.
 
 The result, a binary image where pixel values are either True or False based on the thresholding, will be saved as "otsu.tif" in the same directory where the script is executed.
 
