@@ -108,17 +108,16 @@ sh ${WORKSPACE}/scripts/exec-app-water-body.sh
 
 ### Step 5 - Stage-out to S3
 
+This step uploads the STAC Catalog to S3.
+
 ``` title="terminal"
-cwltool \
-    --podman \
-    ${WORKSPACE}/cwl-cli/stage-out.cwl \
-    --aws_access_key_id $( cat ~/.aws/credentials | grep aws_access_key_id | cut -d "=" -f 2 ) \
-    --aws_secret_access_key $( cat ~/.aws/credentials | grep aws_secret_access_key | cut -d "=" -f 2 ) \
-    --endpoint_url $( cat ~/.aws/config | grep endpoint_url | head -n 1 | cut -d "=" -f 2 ) \
-    --region_name $( cat ~/.aws/config | grep region | cut -d "=" -f 2 ) \
-    --s3_bucket bids23 \
-    --sub_path processing-results/$( cat /proc/sys/kernel/random/uuid ) \
-    --stac_catalog $( cat /workspace/runs/results.json | jq -r .stac_catalog.path ) > staged-s3.json
+--8<--
+scripts/cwl-cli-stage-out-released.sh
+--8<--
+```
+
+```
+sh ${WORKSPACE}/scripts/cwl-cli-stage-out-released.sh
 ```
 
 Check the staged results on S3:
