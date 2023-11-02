@@ -19,12 +19,12 @@ subgraph scatter on bands
   P --> B(("crop(green)"))
   P --> C(("crop(nir)"))
   Q --> B(("crop(green)"))
-  Q --> C(("crop(green)"))
+  Q --> C(("crop(nir)"))
   R --> B(("crop(green)"))
-  R --> C(("crop(green)"))
+  R --> C(("crop(nir)"))
 end
 B(("crop(green)")) --> D
-C(("crop(green)")) --> D
+C(("crop(nir)")) --> D
 D(("`Normalized 
 difference`"));
 D --> E(("`Otsu

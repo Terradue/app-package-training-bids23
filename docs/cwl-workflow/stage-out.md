@@ -43,12 +43,14 @@ It uses a custom STAC I/O to facilitate S3 interactions.
 
 The AWS credentials and endpoint URL need to be properly configured in the environment variables for the script to work. A
 
-
 ```bash linenums="1" hl_lines="8-71"
 --8<--
 scripts/build-stage-container.sh
 --8<--
+
 ```
+
+To run the stage-out step, one would run:
 
 ```bash linenums="1" hl_lines="8-71"
 --8<--

@@ -8,4 +8,4 @@ cwltool \
     --aoi="-118.985,38.432,-118.183,38.938" \
     --epsg "EPSG:4326" \
     --bands green \
-    --bands nir08 > results.json
+    --bands nir08

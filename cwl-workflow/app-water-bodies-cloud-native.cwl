@@ -120,7 +120,7 @@ $graph:
         ramMax: 512
     hints:
       DockerRequirement:
-        dockerPull: ghcr.io/terradue/ogc-eo-application-package-hands-on/crop:bids23
+        dockerPull: localhost/crop:latest
     baseCommand: ["python", "-m", "app"]
     arguments: []
     inputs:
@@ -158,7 +158,7 @@ $graph:
         ramMax: 512
     hints:
       DockerRequirement:
-        dockerPull: ghcr.io/terradue/ogc-eo-application-package-hands-on/norm_diff:bids23
+        dockerPull: localhost/norm_diff:latest
     baseCommand: ["python", "-m", "app"]
     arguments: []
     inputs:
@@ -184,7 +184,7 @@ $graph:
         ramMax: 512
     hints:
       DockerRequirement:
-        dockerPull: ghcr.io/terradue/ogc-eo-application-package-hands-on/otsu:bids23
+        dockerPull: localhost/otsu:latest
     baseCommand: ["python", "-m", "app"]
     arguments: []
     inputs:
@@ -210,7 +210,7 @@ $graph:
         ramMax: 512
     hints:
       DockerRequirement:
-        dockerPull: ghcr.io/terradue/ogc-eo-application-package-hands-on/stac:bids23
+        dockerPull: localhost/stac:latest
     baseCommand: ["python", "-m", "app"]
     arguments: []
     inputs:
