@@ -1,6 +1,6 @@
 ### Goal
 
-Run the `app-water-body-cloud-native.1.0.0.cwl` Application Package using `cwltool`.
+Run the `app-water-body-cloud-native.1.0.0.cwl` released application package using `cwltool`.
 
 ### Step 1 - Configure the workspace
 
