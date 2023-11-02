@@ -52,6 +52,9 @@ extra_javascript:
 
 nav:
   - Introduction: 'index.md'
+  - Prerequisites: 
+    - Introduction to YAML: prerequisites/yaml.md
+    - Introduction to CWL: prerequisites/cwl.md
   - Earth Observation Application Package:
     - OGC Context: app-package/ogc-context.md
   - Introducing the application:
@@ -101,7 +104,7 @@ nav:
       - Sentinel-2: cwl-workflow/exec-cloud-native.md
       - Landsat-9: cwl-workflow/exec-stage-in.md
     - Running CWL Workflow on Kubernetes: 
-      - TODO Run the CWL Workflow with calrissian: kubernetes/calrissian.md 
+      - Run the CWL Workflow with calrissian: kubernetes/calrissian.md 
   - FAIR Application Packages: fair/best-practice.md
   - Reference:
     - OGC Application Package Best Practice: reference/ogc-ap-bp.md
@@ -110,5 +113,3 @@ nav:
     - Tools: 
       - cwltool: reference/cwltool.md
       - calrissian: reference/calrissian.md
-  - New to YAML: new-to/yaml.md
-  - New to CWL: new-to/cwl.md
