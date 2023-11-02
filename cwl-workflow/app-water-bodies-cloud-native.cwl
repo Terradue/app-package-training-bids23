@@ -158,7 +158,7 @@ $graph:
         ramMax: 512
     hints:
       DockerRequirement:
-        dockerPull: localhost/norm_diff:latest
+        dockerPull: localhost/norm-diff:latest
     baseCommand: ["python", "-m", "app"]
     arguments: []
     inputs:
