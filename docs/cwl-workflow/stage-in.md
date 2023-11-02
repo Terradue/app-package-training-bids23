@@ -58,7 +58,7 @@ scripts/cwl-cli-stage-in.sh
 The result is redirected to a file named `staged.json` as we use `jq` to get the path of the staged product:
 
 ```bash title="terminal"
-cat staged.json | jq -r .staged
+cat staged.json | jq -r .staged.path
 ```
 
 This returns a path like `/workspace/runs/921x91vw`
