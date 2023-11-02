@@ -31,18 +31,16 @@ sh ${WORKSPACE}/scripts/download-app-water-body.sh
 
 ### Step 3 - Stage-in the Landsat-9 acquisition
 
-```bash linenums="1" hl_lines="8-71"
---8<--
-scripts/build-stage-container.sh
---8<--
-```
-
-Now the Landsat-9 acquistion "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" is staged with: 
+The Landsat-9 acquistion "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_042033_20231015_02_T1" is staged with: 
 
 ```bash linenums="1" hl_lines="8"
 --8<--
-scripts/cwl-cli-stage-in.sh
+scripts/cwl-cli-stage-in-released.sh
 --8<--
+```
+
+```
+sh ${WORKSPACE}/scripts/cwl-cli-stage-in-released.sh
 ```
 
 The result is redirected to a file named `staged.json` as we use `jq` to get the path of the staged product:
