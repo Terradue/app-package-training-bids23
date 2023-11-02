@@ -1,5 +1,7 @@
 mkdir -p /calrissian/logs
 
+version="1.0.0"
+
 calrissian \
     --stdout /calrissian/results.json \
     --stderr /calrissian/app.log \
@@ -9,6 +11,7 @@ calrissian \
     --outdir /calrissian/results \
     --usage-report /calrissian/usage.json \
     --tool-logs-basepath /calrissian/logs \
+    --pod-nodeselectors /etc/calrissian/pod-node-selector.yaml \
     /workspace/runs/app-water-bodies-cloud-native.${version}.cwl \
     --stac_items "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2A_10TFK_20210708_0_L2A" \
     --stac_items "https://earth-search.aws.element84.com/v0/collections/sentinel-s2-l2a-cogs/items/S2B_10TFK_20210713_0_L2A" \

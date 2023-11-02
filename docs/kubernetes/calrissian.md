@@ -61,3 +61,31 @@ node-crop-pod-ebgkkvpc     0/1     ContainerCreating   0          8s
 scripts/calrissian-inspect-results.sh
 --8<--
 ```
+
+### Expected outcome
+
+```
+(base) jovyan@coder-mrossi:~/runs$ tree $( cat /calrissian/results.json | jq -r .stac_catalog.path )
+/calrissian/results/tmp3vhr5k8r
+├── S2A_10TFK_20210708_0_L2A
+│   ├── S2A_10TFK_20210708_0_L2A.json
+│   └── otsu.tif
+├── S2A_10TFK_20210718_0_L2A
+│   ├── S2A_10TFK_20210718_0_L2A.json
+│   └── otsu.tif
+├── S2A_10TFK_20220504_0_L2A
+│   ├── S2A_10TFK_20220504_0_L2A.json
+│   └── otsu.tif
+├── S2A_10TFK_20220514_0_L2A
+│   ├── S2A_10TFK_20220514_0_L2A.json
+│   └── otsu.tif
+├── S2A_10TFK_20220524_0_L2A
+│   ├── S2A_10TFK_20220524_0_L2A.json
+│   └── otsu.tif
+├── S2B_10TFK_20210713_0_L2A
+│   ├── S2B_10TFK_20210713_0_L2A.json
+│   └── otsu.tif
+└── catalog.json
+
+6 directories, 13 files
+```
