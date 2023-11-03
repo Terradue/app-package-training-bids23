@@ -1,7 +1,7 @@
 site_name: Mastering Earth Observation Application Packaging with CWL
 
 theme:
-    logo: styles/img/logo.png
+    logo: icon-eoap.png
     name: material
 
     palette:
