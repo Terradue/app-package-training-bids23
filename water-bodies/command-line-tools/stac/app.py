@@ -6,6 +6,7 @@ import pystac
 import rio_stac
 from loguru import logger
 
+
 @click.command(
     short_help="Creates a STAC catalog",
     help="Creates a STAC catalog with the water bodies",
@@ -59,6 +60,7 @@ def to_stac(item_urls, water_bodies):
         root_href="./", catalog_type=pystac.CatalogType.SELF_CONTAINED
     )
     logger.info("Done!")
+
 
 if __name__ == "__main__":
     to_stac()

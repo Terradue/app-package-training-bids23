@@ -1,15 +1,17 @@
 import os
 import click
 import pystac
-import rasterio 
+import rasterio
 from rasterio.mask import mask
 from pyproj import Transformer
 from shapely import box
 from loguru import logger
 
+
 def aoi2box(aoi):
     """Converts an area of interest expressed as a bounding box to a list of floats"""
     return [float(c) for c in aoi.split(",")]
+
 
 def get_asset(item, common_name):
     """Returns the asset of a STAC Item defined with its common band name"""
@@ -26,6 +28,7 @@ def get_asset(item, common_name):
                 and b.properties["common_name"] == common_name
             ):
                 return asset
+
 
 @click.command(
     short_help="Crop",
@@ -73,7 +76,7 @@ def crop(item_url, aoi, band, epsg):
         logger.error(msg)
         raise ValueError(msg)
 
-    bbox = aoi2box(aoi) 
+    bbox = aoi2box(aoi)
 
     with rasterio.open(asset.get_absolute_href()) as src:
 
@@ -86,19 +89,31 @@ def crop(item_url, aoi, band, epsg):
 
         logger.info(f"Crop {asset.get_absolute_href()}")
 
-        out_image, out_transform = rasterio.mask.mask(src, [transformed_bbox], crop=True)
+        out_image, out_transform = rasterio.mask.mask(
+            src, [transformed_bbox], crop=True
+        )
         out_meta = src.meta.copy()
 
-        out_meta.update({
-            "height": out_image.shape[1],
-            "width": out_image.shape[2],
-            "transform": out_transform
-        })
-        with rasterio.open(f"crop_{band}.tif", 'w', **out_meta) as dst_dataset:
+        out_meta.update(
+            {
+                "height": out_image.shape[1],
+                "width": out_image.shape[2],
+                "transform": out_transform,
+                "dtype": "uint16",
+                "driver": "COG",
+                "tiled": True,
+                "compress": "lzw",
+                "blockxsize": 256,
+                "blockysize": 256,
+            }
+        )
+
+        with rasterio.open(f"crop_{band}.tif", "w", **out_meta) as dst_dataset:
             logger.info(f"Write crop_{band}.tif")
             dst_dataset.write(out_image)
 
     logger.info("Done!")
+
 
 if __name__ == "__main__":
     crop()
