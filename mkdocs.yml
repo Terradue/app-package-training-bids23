@@ -56,7 +56,7 @@ nav:
     - Introduction to YAML: prerequisites/yaml.md
     - Introduction to CWL: prerequisites/cwl.md
   - Earth Observation Application Package:
-    - OGC Context: app-package/ogc-context.md
+    - OGC Activities: app-package/ogc-context.md
   - Introducing the application:
     - Water bodies detection: app/water-bodies-detection.md
     - Application Steps:
