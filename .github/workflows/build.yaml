@@ -11,7 +11,8 @@ on:
     - 'water-bodies/**'
     - .github/**
     - docs/**
-
+    - cwl-workflow/*.cwl
+    - codemeta.json
 jobs:
   validate:
     runs-on: ubuntu-latest
