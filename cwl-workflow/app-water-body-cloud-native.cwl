@@ -7,8 +7,8 @@ schemas:
 $graph:
   - class: Workflow
     id: main
-    label: Water body detection based on NDWI and the otsu threshold
-    doc: Water body detection based on NDWI and the otsu threshold
+    label: Water bodies detection based on NDWI and the otsu threshold
+    doc: Water bodies detection based on NDWI and otsu threshold applied to a single Sentinel-2 COG STAC item
     requirements:
       - class: ScatterFeatureRequirement
     inputs:
