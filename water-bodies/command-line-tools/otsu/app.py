@@ -25,7 +25,7 @@ def otsu(raster):
 
     out_meta.update(
         {
-            "dtype": "float32",
+            "dtype": "uint8",
             "driver": "COG",
             "tiled": True,
             "compress": "lzw",
