@@ -3,12 +3,13 @@ Previous OGC Testbeds 13-16 initiated the design of an application package for E
 
 The application package provides information about the software item, metadata and dependencies
 
-Deployed and executed within an Exploitation Platform in a service compliant with the OGC API Processes specification
+The application package can be deployed and executed within an Exploitation Platform in a service compliant with the OGC API Processes specification
 
-OGC 20-089 Defines the Best Practice to package and deploy Earth Observation Applications in an Exploitation Platform
+OGC 20-089 defines the Best Practice to package and deploy Earth Observation Applications in an Exploitation Platform
 
 
 OGC 20-089 defines guidance for the 3 viewpoints:
+
 * For a Developer to adapt an application 
 * For an Integrator to package an application 
 * For an Platform to deploy and execute the application
